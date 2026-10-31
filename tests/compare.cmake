@@ -1,0 +1,10 @@
+# Runs two golden-hash executables and fails if their outputs differ.
+execute_process(COMMAND ${A} OUTPUT_VARIABLE OUT_A RESULT_VARIABLE RC_A)
+execute_process(COMMAND ${B} OUTPUT_VARIABLE OUT_B RESULT_VARIABLE RC_B)
+if(NOT RC_A EQUAL 0 OR NOT RC_B EQUAL 0)
+  message(FATAL_ERROR "golden executables failed: ${RC_A} ${RC_B}")
+endif()
+if(NOT OUT_A STREQUAL OUT_B)
+  message(FATAL_ERROR "vectorized and baseline builds differ:\n--- ${A}\n${OUT_A}\n--- ${B}\n${OUT_B}")
+endif()
+message(STATUS "vectorized and baseline builds produce identical data:\n${OUT_A}")

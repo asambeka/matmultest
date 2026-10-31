@@ -1,0 +1,7 @@
+# Build output
+build/
+
+# Generated datasets (tens of GiB; regenerate with `matgen generate`)
+data/
+test_dataset_tmp/
+*.partial
